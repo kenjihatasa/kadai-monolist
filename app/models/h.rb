@@ -1,0 +1,2 @@
+class H < Ownership
+end
