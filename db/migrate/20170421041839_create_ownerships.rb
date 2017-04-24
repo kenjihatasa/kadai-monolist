@@ -6,7 +6,7 @@ class CreateOwnerships < ActiveRecord::Migration[5.0]
       t.references :item, foreign_key: true
 
       t.timestamps
-      
+
       t.index [:user_id, :item_id , :type], unique: true
     end
   end

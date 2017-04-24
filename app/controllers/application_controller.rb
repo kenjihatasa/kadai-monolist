@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+ protect_from_forgery with: :exception
 
   include SessionsHelper
 
@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
       redirect_to login_url
     end
   end
-  
+
   private
 
   def read(result)

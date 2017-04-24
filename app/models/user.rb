@@ -1,4 +1,9 @@
 class User < ApplicationRecord
+  before_save { self.email.downcase! }
+  validates :name, presence: true, length: { maximum: 50 }
+  validates :email, presence: true, length: { maximum: 255 },
+                    format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i },
+                    uniqueness: { case_sensitive: false }
   has_secure_password
   
   has_many :ownerships
@@ -24,16 +29,16 @@ class User < ApplicationRecord
     self.want_items.include?(item)
   end
   
-  def h(item)
+  def have(item)
     self.hs.find_or_create_by(item_id: item.id)
   end
 
-  def unh(item)
+  def unhave(item)
     h = self.hs.find_by(item_id: item.id)
-    h.destroy if have
+    h.destroy if h
   end
 
-  def h?(item)
+  def have?(item)
     self.h_items.include?(item)
   end
 end

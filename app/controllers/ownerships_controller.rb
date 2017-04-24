@@ -17,7 +17,7 @@ class OwnershipsController < ApplicationController
     end
     
     if params[:type] == 'H'
-      current_user.h(@item)
+      current_user.have(@item)
       flash[:success] = '商品を Have しました。'
     end
 
@@ -25,7 +25,7 @@ class OwnershipsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
- def destroy
+  def destroy
     @item = Item.find(params[:item_id])
 
     if params[:type] == 'Want'
@@ -34,10 +34,12 @@ class OwnershipsController < ApplicationController
     end
     
     if params[:type] == 'H'
-      current_user.unh(@item) 
+      current_user.unhave(@item) 
       flash[:success] = '商品の Have を解除しました。'
     end
 
     redirect_back(fallback_location: root_path)
   end
+
+
 end
